@@ -1,0 +1,33 @@
+<html>
+<head>
+{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<!-- <link rel="stylesheet" href="{% static 'css/dat.gui.css' %}" /> -->
+	  <!-- <script src="https://cdn.rawgit.com/konvajs/konva/1.4.0/konva.min.js"></script> -->
+
+	<script type="text/javascript" src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mousewheel.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/jquery.Jcrop.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.color.js' %}"></script>
+	<!-- <script type="text/javascript" src="{% static 'js/jscolor.js' %}"></script> -->
+	<script type="text/javascript" src="{% static 'js/prefixfree.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/konva.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/paper-full.js' %}"></script>
+	<!-- <script type="text/javascript" src="{% static 'js/paper.js' %}"></script> -->
+
+	<script type="text/javascript" src="{% static 'js/jquery.keyboard.js' %}" ></script>
+	<!-- <script type="text/javascript" src="{% static 'js/dat.gui.min.js' %}"></script> -->
+
+
+	<!-- <script type="text/javascript" src="{% static 'js/random.js' %}"></script> -->
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body class="full">
+{% block content %}{% endblock %}
+</body>
+</html>

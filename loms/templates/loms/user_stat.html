@@ -1,0 +1,104 @@
+{% extends "soms/base.html" %}
+{% load staticfiles %}
+{% block head %}
+<script type="text/javascript" src="{% static 'soms/jquery.js' %}" /></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.show').click(function(){
+			$(this).siblings('.frame').toggle();
+		});
+	});
+
+</script>
+{% endblock %}
+{% block content %}
+<h2>Статистика по нагрузке "{{ loading.name }}"</h2><h2> Модель "{{ loading.network_map }}"</h2>
+
+{% if stat %}
+
+<p>Количество заявок на подключение:{{stat.connect_count__sum}}</p>
+<p>Количестов заявок на отключение:{{stat.disconnect_count__sum}}</p>
+<p>Количество удачных подключений:{{stat.success}}</p>
+<p>Очередь заявок на подключение:{{stat.failure}}</p>
+
+{% endif %}
+
+
+{% if loading_stat %}
+<table>
+	<tr>
+	  <th>Шаг</th>
+	  <th>Заявки на подключение</th>
+	  <th>Заявки на отключение</th>
+	  <th>Работа алгоритма подключения</th>
+	  <th>Работа алгоритма переподключения</th>
+	  <th>Очередь</th>
+	</tr>
+    {% for node_stat in loading_stat %}
+	<tr>
+	<td>{{ node_stat.step }}</a></td>
+	<td>{{ node_stat.users|safe }}</a></td>
+	<td>{{ node_stat.disconnect|safe }}</a></td>
+	<td>{{ node_stat.connect|safe }}</a></td>
+	<td>{{ node_stat.reconnect|safe }}</a></td>
+	<td>{{ node_stat.query|safe }}</a></td>
+	</tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <p>Статистика отсутствует</p>
+{% endif %}
+
+{% if nodes_stat %}
+<br />
+<table>
+	<tr>
+	  <th>Шаг</th>
+	  <th>Узел</th>
+	  <th>Загрузка оперативной памяти (%)</th>
+	  <th>Загрузка процессора (%)</th>
+	  <th>Объём пропускной способности входящего канала (Мбит)</th>
+	  <th>Объём пропускной способности исходящего канала (Мбит)</th>
+	  <!-- <th>Нагрузка</th> -->
+	  <th>Подключённые пользователи</th>
+	</tr>
+    {% for node_stat in nodes_stat %}
+	<tr>
+	<td>{{ node_stat.step }}</td>
+	<td>{{ node_stat.node }}</td>
+	<td>{{ node_stat.memory }}</td>
+	<td>{{ node_stat.cpu }}</td>
+	<td>{{ node_stat.input_bandwidth }}</td>
+	<td>{{ node_stat.output_bandwidth }}</td>
+	<!--
+	<td>{{ node_stat.overload }}</td>
+	-->
+	<td>{{ node_stat.users }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<br />
+{% if routes_stat %}
+<table>
+	<tr>
+	  <th>Шаг</th>
+	  <th>Маршрут</th>
+	  <th>Пропускная способность (Мбит)</th>
+	  <th>Пользователи</th>
+	</tr>
+    {% for route_stat in routes_stat %}
+	<tr>
+	<td>{{ route_stat.step }}</td>
+	<td>{{ route_stat.route }}</td>
+	<td>{{ route_stat.bandwidth }}</td>
+	<td>{{ route_stat.users }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
+

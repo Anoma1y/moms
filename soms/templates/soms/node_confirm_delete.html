@@ -1,0 +1,4 @@
+<form id="node_delete" action="{% url 'soms:node:delete' object.id %}" method="post">{% csrf_token %}
+    <h3>Вы уверены что хотите удалить узел "{{ object }}"?</h3>
+    <input type="submit" value="Удалить" />
+</form>

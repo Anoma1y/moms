@@ -1,0 +1,62 @@
+{% extends "soms/base.html" %}
+{% block content %}
+<h2>Список нагрузок мультимедийных сетей</h2>
+    {% if user.is_staff %}
+<a href="{% url 'loms:add' %}">Добавить нагрузку</a>
+
+<br /><br />
+    {% endif %}
+{% if loading_list %}
+<table border=1>
+	<tr>
+		<th style="min-width: 200px">Название</th>
+		<th>Модель</th>
+        {% if user.is_staff %}
+		<th>Действия</th>
+        {% endif %}
+		<th>Статистика</th>
+		<th>Графики</th>
+	</tr>
+    {% for loading in loading_list %}
+	<tr>
+	<td><a href="{% url 'loms:detail' loading.id %}">{{ loading.name }}</a></td>
+	<td>{{ loading.network_map }}</td>
+    {% if user.is_staff %}
+	<td>
+		<a href="{% url 'loms:update' loading.id %}">Изменить</a>&nbsp;
+		<a href="{% url 'loms:delete' loading.id %}">Удалить</a>&nbsp;
+		<a href="{% url 'loms:copy' loading.id %}">Копировать</a>&nbsp; 
+	</td>
+    {% endif %}
+	<td>
+		{% if loading.loadingstat_set.all %}
+		<a href="{% url 'loms:user_stat' loading.id %}">Просмотр</a>&nbsp;
+            {% if user.is_staff %}
+		<a href="{% url 'loms:user_stat_delete' loading.id %}">Удалить</a>&nbsp;
+                {% endif %}
+		{% else %}
+                {% if user.is_staff %}
+		<a href="{% url 'loms:user_stat' loading.id %}">Моделировать</a>
+                {% endif %}
+		{% endif %}
+	</td>
+	<td>
+		{% if loading.loadingstat_set.all %}
+		<a href="{% url 'loms:chart:loading' loading.id %}">Общие</a>&nbsp;
+		{% endif %}
+		{% if loading.nodeloadingstat_set.all %}
+		<a href="{% url 'loms:chart:node_list' loading.id %}">Узлы</a>&nbsp; 
+		{% endif %}
+		{% if loading.routeloadingstat_set.all %}
+		<a href="{% url 'loms:chart:route_list' loading.id %}">Потоки</a>&nbsp;
+		{% else %}
+		&nbsp;
+		{% endif %}
+	</td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Нагрузки отсутствуют</p>
+{% endif %}
+{% endblock %}

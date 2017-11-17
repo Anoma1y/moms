@@ -1,0 +1,5 @@
+<form id="route_loading_delete" action="{% url 'loms:route:delete' pk=pk pk1=pk1 pk2=pk2 %}" method="post">{% csrf_token %}
+	<h3>Удалить нагрузку</h3>
+	{{ form.as_p }}
+	<input type="submit" value="Удалить" />
+</form>

@@ -1,0 +1,4 @@
+<form id="link_delete" action="{% url 'soms:link:delete' object.id %}" method="post">{% csrf_token %}
+    <p><b>Вы уверены что хотите удалить связь "{{ object }}"?</b></p>
+    <input type="submit" value="Удалить" />
+</form>

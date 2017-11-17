@@ -1,0 +1,14 @@
+<form id="user_loading_addformset" action="{% url 'loms:user:addformset' pk1=pk1 pk2=pk2  %}" method="post">{% csrf_token %}
+
+
+    {{ formset.management_form }}
+    {% for form in formset %}
+	{% if forloop.last %}<fieldset><legend>Добавить</legend>{% endif %}
+            {{ form.as_p }}
+			<br style="clear: both" />
+			<br />
+	{% if forloop.last %}</fieldset>{% endif %}
+    {% endfor %}
+
+	<input type="submit" value="Сохранить изменения" />
+</form>

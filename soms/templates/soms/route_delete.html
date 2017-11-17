@@ -1,0 +1,5 @@
+<form id="route_delete" action="{% url 'soms:route:delete_nodes' node_from.pk node_to.pk %}" method="post">{% csrf_token %}
+	<h3>Удалить связь</h3>
+	{{	form.as_p }}
+	<input type="submit" value="Удалить" />
+</form>

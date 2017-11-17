@@ -1,0 +1,22 @@
+{% load staticfiles %}
+{% load i18n %}
+<form id="node_add" enctype="multipart/form-data" action="{% url 'soms:node:add' %}" method="post">{% csrf_token %}
+	<h3>{% trans 'Add' %} {% trans 'Node' %}</h3>
+	{{ form.as_p }}	
+	<input type="button" id="default_control" value="Заполнить">
+	<input type="submit" value="Добавить" />
+
+</form>
+<script>
+    $(document).ready(function() {
+    	$('#id_color').removeClass('colorfield_field');
+	    $('#id_color').val('');
+	    $('#id_color').attr('type','color');
+	    $('#id_color').css({
+	    	width: '147px',
+	    });
+	    $('#id_color')[0].labels[0].textContent = 'Цвет';
+	   	$('#id_thickness')[0].labels[0].textContent = 'Толщина';
+	    $('#id_image')[0].labels[0].textContent = 'Изображение';
+    });
+</script>

@@ -1,0 +1,12 @@
+<form id="track_add" action="{% url 'soms:track:add' view.networkmap.pk %}" method="post">{% csrf_token %}
+	<p><b>Добавить связь</b></p>
+	{{	form.as_p }}
+	<input type="submit" value="Добавить" />
+</form>
+<script>
+    $(document).ready(function() {
+    	$('#id_color_track').removeClass('colorfield_field');
+	    $('#id_color_track').val('');
+	    $('#id_color_track').attr('type','color');
+    });
+</script>

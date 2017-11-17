@@ -1,0 +1,4 @@
+<form id="node_loading_delete" action="{% url 'loms:node:delete' loading_pk=loading_pk node_pk=node_pk %}" method="post">{% csrf_token %}
+	<h3>Удалить нагрузку</h3>
+	<input type="submit" value="Удалить" />
+</form>

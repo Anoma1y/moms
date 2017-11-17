@@ -1,0 +1,18 @@
+{% extends "soms/base.html" %}
+{% block content %}
+<h2>Графики потоков</h2>
+{% if routes %}
+<table border=1>
+	<tr>
+	  <th>Маршрут</th>
+	</tr>
+    {% for route in routes %}
+	<tr>
+	<td><a href="{% url 'loms:chart:route' loading.id route.id %}">{{ route }}</a></td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Статистика отсутствует</p>
+{% endif %}
+{% endblock %}

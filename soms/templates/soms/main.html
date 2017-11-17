@@ -1,0 +1,10 @@
+{% extends "soms/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<h2>Добро пожаловать в среду MOMS для моделирования интернет-видеосистем </h2>
+<h3>(систем раздачи мультимедийного контента реального времени)</h3>
+<img src="{% static 'img/start.png' %}" usemap="#navigation" />
+<map name="navigation">
+<area shape="rect" coords="4, 0, 341, 169" href="{% url 'soms:add' %}" >
+</map>
+{% endblock %}

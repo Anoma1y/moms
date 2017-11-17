@@ -1,0 +1,8 @@
+{% extends "soms/base.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+	<h2>Добавить нагрузку</h2>
+	{{	form.as_p }}
+	<input type="submit" value="Добавить" />
+</form>
+{% endblock %}

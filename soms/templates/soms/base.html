@@ -1,0 +1,29 @@
+<html>
+<head>
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% block head %}{% endblock %}
+
+</head>
+<body>
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="{% url 'soms:main' %}"></a>
+<a id="admin" href="/admin"></a>
+<div id="menu">
+<a href="{% url 'soms:index' %}">Модели</a>
+<a href="{% url 'loms:index' %}">Нагрузка</a>
+<a href="{% url 'loms:index' %}">Статистика</a>
+<a href="{% url 'soms:documents' %}">Документация</a>
+</div>
+</div>
+
+<div id="content">
+ {% block content %}{% endblock %}
+</div>
+<div id="footer">&copy;2014</div>
+
+</div>
+</body>
+</html>

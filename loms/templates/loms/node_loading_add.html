@@ -1,0 +1,82 @@
+<form id="node_loading_add" action="{% url 'loms:node:add' loading_pk=loading_pk node_pk=node_pk  %}" method="post">{% csrf_token %}
+	<h3>Добавить нагрузку</h3>
+
+	{{	form.non_fields_errors }}
+	<fieldset>
+	<legend>Загруженность входящего канала</legend>
+	<p>
+		{{ form.min_input_bandwidth.errors }}
+		<label for="{{ form.min_input_bandwidth.id_for_label }}">от (%)</label>
+		{{ form.min_input_bandwidth }}
+	</p>
+	<p>
+		{{ form.max_input_bandwidth.errors }}
+		<label for="{{ form.max_input_bandwidth.id_for_label }}">до (%)</label>
+		{{ form.max_input_bandwidth }}
+	</p>
+	<p>
+		{{ form.ib_algorithm.errors }}
+		<label for="{{ form.ib_algorithm.id_for_label }}">Алгоритм генерации значений:</label>
+		{{ form.ib_algorithm }}
+	</p>
+	</fieldset>
+
+	<fieldset>
+	<legend>Загруженность исходящего канала</legend>
+	<p>
+		{{ form.min_output_bandwidth.errors }}
+		<label for="{{ form.min_output_bandwidth.id_for_label }}">от (%)</label>
+		{{ form.min_output_bandwidth }}
+	</p>
+	<p>
+		{{ form.max_output_bandwidth.errors }}
+		<label for="{{ form.max_output_bandwidth.id_for_label }}">до (%)</label>
+		{{ form.max_output_bandwidth }}
+	</p>
+	<p>
+		{{ form.ob_algorithm.errors }}
+		<label for="{{ form.ob_algorithm.id_for_label }}">Алгоритм генерации значения:</label>
+		{{ form.ob_algorithm }}
+	</p>
+	</fieldset>
+
+	<fieldset>
+	<legend>Загруженность процессора</legend>
+	<p>
+		{{ form.min_cpu.errors }}
+		<label for="{{ form.min_cpu.id_for_label }}">от (%)</label>
+		{{ form.min_cpu }}
+	</p>
+	<p>
+		{{ form.max_cpu.errors }}
+		<label for="{{ form.max_cpu.id_for_label }}">до (%)</label>
+		{{ form.max_cpu }}
+	</p>
+	<p>
+		{{ form.cpu_algorithm.errors }}
+		<label for="{{ form.cpu_algorithm.id_for_label }}">Алгоритм генерации значения:</label>
+		{{ form.cpu_algorithm }}
+	</p>
+	</fieldset>
+
+	<fieldset>
+	<legend>Загруженность памяти</legend>
+	<p>
+		{{ form.min_memory.errors }}
+		<label for="{{ form.min_memory.id_for_label }}">от (%)</label>
+		{{ form.min_memory }}
+	</p>
+	<p>
+		{{ form.max_memory.errors }}
+		<label for="{{ form.max_memory.id_for_label }}">до (%)</label>
+		{{ form.max_memory }}
+	</p>
+	<p>
+		{{ form.memory_algorithm.errors }}
+		<label for="{{ form.memory_algorithm.id_for_label }}">Алгоритм генерации значения:</label>
+		{{ form.memory_algorithm }}
+	</p>
+	</fieldset>
+
+	<input type="submit" value="Добавить" />
+</form>

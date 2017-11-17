@@ -1,0 +1,56 @@
+{% extends "soms/base.html" %}
+{% block head %}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+	titles =
+          	[
+				'Шаг', 
+				'Количество подключенных клиентов (зрителей)',
+			];
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			titles,
+    	{% for stat in route_stat %}
+			[
+				{{stat.step}}, 
+				{{stat.users }},
+			],
+		{% endfor %}
+        ]);
+        var options = {
+		  	hAxis: {
+				'title': 'Шаг (сек.)', 
+			},
+		  	vAxis: {
+				'title': 'Количество', 
+			}
+
+        };
+
+/*
+		options['chartArea'] = {'width': '60%', 'height': '80%'};
+		//options['legend'] = {'position': 'top'};
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+        chart.draw(data, options);
+*/
+		for(var i = 1; i < titles.length; i++)
+		{
+		options['title'] = titles[i];
+		options['legend'] = {'position':'none'};
+		options['chartArea'] = {'width': '80%', 'height': '80%'};
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart'+i));
+		var view = new google.visualization.DataView(data);
+		view.setColumns([0,i])
+        chart.draw(view, options);
+		}
+	
+      }
+    </script>
+{% endblock %}
+{% block content %}
+	<h2>Статистика потока "{{route}}"</h2>
+    <div class="chart" id="chart1"></div>
+{% endblock %}

@@ -1,0 +1,4 @@
+<form id="route_loading_update" action="{% url 'loms:route:update' pk=pk route_loading_pk=route_loading.pk  %}" method="post">{% csrf_token %}
+	{{form.as_p }}
+	<input type="submit" value="Изменить" />
+</form>

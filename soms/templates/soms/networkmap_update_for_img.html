@@ -1,0 +1,7 @@
+<form id="networkmap_update" enctype="multipart/form-data" action="{% url 'soms:update_for_img' object.id  %}" method="POST">
+{% csrf_token %}
+	<h3>Изменить модель</h3>
+	{{	form.as_p }}
+	<input type="submit" value="Изменить" />
+</form>
+

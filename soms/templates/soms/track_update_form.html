@@ -1,0 +1,5 @@
+<form id="track_update" action="{% url 'soms:track:update' object.id  %}" method="post">{% csrf_token %}
+	<p><b>Изменить связь</b></p>
+	{{	form.as_p }}
+	<input type="submit" value="Изменить" />
+</form>

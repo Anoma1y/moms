@@ -1,0 +1,27 @@
+{% extends "soms/base.html" %}
+{% block content %}
+<h2>Список моделей мультимедийных сетей</h2>
+<a href="{% url 'soms:modelka' %}">Попробовать</a><br />
+{% if user.is_staff %}<a href="{% url 'soms:add' %}">Добавить модель</a>{% endif %}
+<br /><br />
+{% if networkmap_list %}
+<table>
+<tr><th style="min-width: 200px">Название</th><th>Количество узлов</th>{% if user.is_staff %}<th>Действия</th>{% endif %}</tr>
+    {% for networkmap in networkmap_list %}
+	<tr>
+	<td><a href="{% url 'soms:detail' networkmap.id %}">{{ networkmap.name }}</a></td>
+	<td>{{ networkmap.num_nodes }} </td>
+    {% if user.is_staff %}
+	<td>
+	    <a href="{% url 'soms:update' networkmap.id %}">Изменить</a>&nbsp; 
+		<a href="{% url 'soms:delete' networkmap.id %}">Удалить</a>&nbsp;
+		<a href="{% url 'soms:copy' networkmap.id %}">Копировать</a>&nbsp;
+	</td>
+    {% endif %}
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Модели отсутствуют</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+<form id="link_add" action="{% url 'soms:link:add' view.networkmap.pk %}" method="post">{% csrf_token %}
+	<p><b>Добавить связь</b></p>
+	{{	form.as_p }}
+	<input type="submit" value="Добавить" />
+</form>
+<script>
+	$(document).ready(function() {
+    	$('#id_color_track').removeClass('colorfield_field');
+	    $('#id_color_track').val('');
+	    $('#id_color_track').attr('type','color');
+	    $('#id_color_track').css({
+	    	width: '147px',
+	    });
+	    $('#id_color_track')[0].labels[0].textContent = 'Цвет';
+	   	$('#id_thickness_track')[0].labels[0].textContent = 'Толщина';
+    });
+</script>

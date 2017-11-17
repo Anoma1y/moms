@@ -1,0 +1,43 @@
+{% load i18n %}
+<head>
+<style>
+body, button, input, table {
+ 	font-size: 11px;
+	font-family: Sans-serif;
+}
+th, td {
+	padding: 3px 10px;
+}
+
+a {
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+<h2>Статистика</h2>
+{% if nodes_stat %}
+<table border=1>
+	<tr>
+	  <th>Шаг</th>
+	  <th>Узел</th>
+	  <th>Память</th>
+	  <th>Процессор</th>
+	  <th>Исходящая</th>
+	  <th>Входящая</th>
+	</tr>
+    {% for node_stat in nodes_stat %}
+	<tr>
+	<td>{{ node_stat.step }}</a></td>
+	<td>{{ node_stat.node }}</td>
+	<td>{{ node_stat.memory }}</td>
+	<td>{{ node_stat.cpu }}</td>
+	<td>{{ node_stat.output_bandwidth }}</td>
+	<td>{{ node_stat.input_bandwidth }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Статистика отсутствует</p>
+{% endif %}
+</body>

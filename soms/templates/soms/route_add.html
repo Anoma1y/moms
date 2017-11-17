@@ -1,0 +1,5 @@
+<form id="route_add" action="{% url 'soms:route:add_nodes' node_from.pk node_to.pk %}" method="post">{% csrf_token %}
+	<h3>Добавить связь</h3>
+	{{	form.as_p }}
+	<input type="submit" value="Добавить" />
+</form>

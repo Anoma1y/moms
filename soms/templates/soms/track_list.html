@@ -1,0 +1,9 @@
+{% if track_list %}
+    <ul>
+    {% for track in track_list %}
+        <li><a href="{% url 'soms:track:update' track.id %}">{{ track.start_node.name }} - {{ track.end_node.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Tracks are available.</p>
+{% endif %}

@@ -1,0 +1,5 @@
+<form id="node_update" action="{% url 'soms:updates' object.id  %}" method="post">{% csrf_token %}
+	<h3>Изменить узел</h3>
+	{{	form.as_p }}
+	<input type="submit" value="Изменить" />
+</form>

@@ -1,0 +1,40 @@
+<form id="networkmap_update" enctype="multipart/form-data" action="{% url 'soms:update_for_model' object.id  %}" method="POST">
+	{% csrf_token %}
+	<h3>Изменить модель</h3>
+	<!-- {{	form.as_p }} -->
+	<input id="id_name" maxlength="200" name="name" type="text" value="{{ networkmap.name }}" />
+	<input id="id_images" name="images" type="file" onchange="img_upload();" />
+	<h5>Добавить изображение</h5>
+	<h4>Удалить изображение</h4>
+	<input id="images-clear_id" name="images-clear" style="width: 15px; float: left;     margin: -2px 9px;" type="checkbox">
+	<input id="id_imgX" maxlength="20" name="imgX" type="text" style="visibility: hidden">
+	<input id="id_imgY" maxlength="20" name="imgY" type="text" style="visibility: hidden">
+	<input id="id_imgWidth" maxlength="20" name="imgWidth" type="text" style="visibility: hidden">
+	<input id="id_imgHeight" maxlength="20" name="imgHeight" type="text" style="visibility: hidden">
+	<input type="submit" style= "" value="Изменить" />
+</form>
+
+<script>
+console.log('ruraw')
+	function img_upload() { 
+		qee = [];
+		var oFile = $('#id_images')[0].files[0];
+		var rFilter = /^(image\/jpeg|image\/png)$/i;
+		if (!rFilter.test(oFile.type)) { 
+			return;
+		} 
+		else if(oFile.name.length >= 100){
+			alert("Название изображения не должно превышать 100 символов")
+			return;
+		}
+		var oReader = new FileReader();
+		oReader.onload = function(e) {
+			qee.push(e.target.result); 
+			var dataString = qee[0];
+				bgImg.push(dataString);
+				upd(dataString);
+			
+		};
+		oReader.readAsDataURL(oFile);
+	}
+</script>

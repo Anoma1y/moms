@@ -1,0 +1,26 @@
+{% extends "soms/base.html" %}
+{% block content %}
+<h2>Графики узлов</h2>
+{% if nodes %}
+<table border=1>
+	<tr>
+	  <th>Узел</th>
+	  <th>Память</th>
+	  <th>Процессор</th>
+	  <th>Исходящая</th>
+	  <th>Входящая</th>
+	</tr>
+    {% for node in nodes %}
+	<tr>
+	<td><a href="{% url 'loms:chart:node' loading.id node.id %}">{{ node.name }}</a></td>
+	<td>{{ node.memory }}</td>
+	<td>{{ node.cpu }}</td>
+	<td>{{ node.output_bandwidth }}</td>
+	<td>{{ node.input_bandwidth }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Статистика отсутствует</p>
+{% endif %}
+{% endblock %}

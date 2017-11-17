@@ -1,0 +1,76 @@
+{% extends "soms/base.html" %}
+{% block head %}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+	titles =
+          	[
+				'Шаг', 
+				'Запас ресурсов исходящего канала',
+				'Количество подключенных клиентов (зрителей)',
+				'Загрузка исходящего канала',
+				'Загрузка входящего канала',
+				'Загрузка процессора',
+				'Загрузка оперативной память',
+			];
+
+	vtitles = [
+		'',
+		'Объем (Мбит)',
+		'Количество',
+		'Объем (Мбит)',
+		'Объем (Мбит)',
+		'Объем (%)',
+		'Объем (%)',
+	]
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			titles,
+    	{% for stat in node_stat %}
+			[
+				{{stat.step}}, 
+				{{stat.overload|stringformat:"f"}},
+				{{stat.users }},
+				{{stat.output_bandwidth|stringformat:"f"}},
+				{{stat.input_bandwidth|stringformat:"f"}},
+				{{stat.cpu|stringformat:"f" }},
+				{{stat.memory|stringformat:"f" }},
+			],
+		{% endfor %}
+        ]);
+        var options = {
+		  	hAxis: {
+				'title': 'Шаг (сек.)', 
+			},
+		  	vAxis: {
+				'title': 'Количество', 
+			}
+
+        };
+
+		for(var i = 1; i < titles.length; i++)
+		{
+		options['title'] = titles[i];
+		options['legend'] = {'position':'none'};
+		options['chartArea'] = {'width': '80%', 'height': '80%'};
+		options['vAxis'] = {'title': vtitles[i]};
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart'+i));
+		var view = new google.visualization.DataView(data);
+		view.setColumns([0,i])
+        chart.draw(view, options);
+		}
+	
+      }
+    </script>
+{% endblock %}
+{% block content %}
+	<h2>Статистика узла "{{node.name}}"</h2>
+    <div class="chart" id="chart1"></div>
+    <div class="chart" id="chart2"></div>
+    <div class="chart" id="chart3"></div>
+    <div class="chart" id="chart4"></div>
+    <div class="chart" id="chart5"></div>
+    <div class="chart" id="chart6"></div>
+{% endblock %}

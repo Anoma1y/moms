@@ -1,0 +1,12 @@
+{% extends "soms/base.html" %}
+{% block content %}
+     {% if user.is_staff %}
+
+<form method="post">{% csrf_token %}
+	<h2>Изменить нагрузку</h2>
+	{{	form.as_p }}
+	<input type="submit" value="Изменить" />
+</form>
+    {% endif %}
+{% endblock %}
+

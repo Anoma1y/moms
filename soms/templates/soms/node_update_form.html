@@ -1,0 +1,19 @@
+<form id="node_update" action="{% url 'soms:node:update' object.id  %}" method="post">{% csrf_token %}
+	<h3>Изменить узел</h3>
+	{{	form.as_p }}
+	<input type="submit" value="Изменить" />
+
+</form>
+<script>
+    $(document).ready(function() {
+    	$('#id_color').removeClass('colorfield_field');
+	    $('#id_color').val('');
+	    $('#id_color').attr('type','color');
+	    $('#id_color').css({
+	    	width: '147px',
+	    });
+	    $('#id_color')[0].labels[0].textContent = 'Цвет';
+	   	$('#id_thickness')[0].labels[0].textContent = 'Толщина';
+	    $('#id_image')[0].labels[0].textContent = 'Изображение';
+    });
+</script>

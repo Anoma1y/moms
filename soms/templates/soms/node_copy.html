@@ -1,0 +1,5 @@
+<form id="loading_copy" action="{% url 'loms:copy' pk=loading_pk  %}" method="post">{% csrf_token %}
+	<h3>Копировать карту</h3>
+	{{form.as_p }}
+	<input type="submit" value="Добавить" />
+</form>
